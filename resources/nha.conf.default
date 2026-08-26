@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+host 127.0.0.1
+port 7872
+# currently unused
+transport tcp
+max_connections 100
+tpm_interval_in_ms 60000
+tsc_check_interval_in_ms 60000
+tsc_check_deviation_threshold 0.001

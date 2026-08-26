@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+set -e
+case "$1" in
+    install|upgrade)
+        if ! getent passwd nha >/dev/null; then
+            echo "Creating system user: nha"
+            adduser --quiet \
+                    --system \
+                    --group \
+                    --no-create-home \
+                    --home /nonexistent \
+                    --shell /usr/sbin/nologin \
+                    nha
+        fi
+    ;;
+esac
+#DEBHELPER#
+exit 0

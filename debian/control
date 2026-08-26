@@ -1,0 +1,11 @@
+Source: nha
+Standards-Version: 0.0.1
+Section: admin
+Priority: important
+Maintainer: placeholder <person@company.com>
+Build-Depends: debhelper-compat (= 13), cmake, pkg-config, build-essential, libssl-dev, libsystemd-dev, libtss2-dev
+
+Package: nha
+Architecture: amd64
+Depends: ${shlibs:Depends}, libssl3, tpm-udev, adduser, systemd, procps, ${misc:Depends}
+Description: Native Hardware Access

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+set -e
+. /usr/share/debconf/confmodule
+
+db_input high nha/host || true
+db_input high nha/port || true
+db_go || true

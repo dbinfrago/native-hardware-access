@@ -1,0 +1,4 @@
+*x86_64*/nha usr/sbin/
+resources/nha.service usr/lib/systemd/system/
+resources/nha.conf.default usr/share/nha/
+resources/perf_event_paranoid.conf /etc/sysctl.d/

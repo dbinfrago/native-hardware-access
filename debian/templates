@@ -1,0 +1,11 @@
+Template: nha/host
+Type: string
+Default: 0.0.0.0
+Description: Enter the IP address for the service:
+ Please provide the IP where the service should listen.
+
+Template: nha/port
+Type: string
+Default: 7872
+Description: Enter the port number:
+ Select a port between 1 and 65535.

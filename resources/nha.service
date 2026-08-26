@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=Native Hardware Access
+Requires=dev-tpmrm0.device
+After=dev-tpmrm0.device network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/nha -c /etc/nha.conf
+User=nha
+Group=nha
+SupplementaryGroups=tss
+AmbientCapabilities=cap_perfmon
+CapabilityBoundingSet=cap_perfmon
+Restart=on-failure
+# Restrict access to the file system (except home/logs/temp)
+ProtectSystem=full
+# Prevents the service from gaining extra privileges
+NoNewPrivileges=true
+SecureBits=noroot
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

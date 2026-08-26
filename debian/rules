@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+%:
+	dh $@
+
+# Override the configure step to pass our custom flag to CMake
+override_dh_auto_configure:
+	dh_auto_configure -- -DBUILD_DEB_PACKAGE=TRUE
+
+# Skip dwz – Clang 15 emits DWARF5 .debug_addr sections that dwz does not support
+override_dh_dwz:

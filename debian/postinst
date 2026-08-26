@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# SPDX-FileCopyrightText: Copyright DB InfraGO AG
+# SPDX-License-Identifier: Apache-2.0
+
+set -e
+. /usr/share/debconf/confmodule
+
+TEMPLATE="/usr/share/nha/nha.conf.default"
+CONFIG_FILE="/etc/nha.conf"
+
+if [ "$1" = "configure" ]; then
+    sysctl -w kernel.perf_event_paranoid=2
+    # 1. Create the file from template if it doesn't exist
+    if [ ! -f "$CONFIG_FILE" ]; then
+        cp "$TEMPLATE" "$CONFIG_FILE"
+    fi
+
+    # 2. Get values from debconf
+    db_get nha/host
+    IP_ADDR="${RET:-0.0.0.0}"
+    db_get nha/port
+    PORT_NUM="${RET:-7872}"
+
+    # 3. Update the values
+    sed -i "s|^host[[:space:]].*|host ${IP_ADDR}|" "$CONFIG_FILE"
+    sed -i "s|^port[[:space:]].*|port ${PORT_NUM}|" "$CONFIG_FILE"
+    
+    chmod 644 "$CONFIG_FILE"
+    chown -R nha:nha "$CONFIG_FILE"
+fi
+
+#DEBHELPER#
+db_stop
+exit 0
